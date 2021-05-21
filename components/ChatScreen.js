@@ -68,7 +68,6 @@ const ChatScreen = ({chat,messages}) => {
         user:user.email,
         photoURL:user.photoURL
      });
-
      Setinput("");
      ScrollToBottom()
    }

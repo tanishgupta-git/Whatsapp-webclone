@@ -1,12 +1,12 @@
 import firebase from 'firebase';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCYAIxlJQSisJ2iVkL5IW2SPC9OATmO_8U",
-    authDomain: "whatsapp-71507.firebaseapp.com",
-    projectId: "whatsapp-71507",
-    storageBucket: "whatsapp-71507.appspot.com",
-    messagingSenderId: "37117719629",
-    appId: "1:37117719629:web:59a7626b53b37b47aad804"
+    apiKey: process.env.NEXT_PUBLIC_apiKey,
+    authDomain:process.env.NEXT_PUBLIC_authDomain,
+    projectId:process.env.NEXT_PUBLIC_projectId,
+    storageBucket:process.env.NEXT_PUBLIC_storageBucket,
+    messagingSenderId:process.env.NEXT_PUBLIC_messagingSenderId,
+    appId:process.env.NEXT_PUBLIC_appId
   };
 
 // we are doing this becuase next.js uses server side rendering so we have to protect ourselves if
