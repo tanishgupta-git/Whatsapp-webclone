@@ -40,7 +40,7 @@ background-color:#dcf8c6;
 `;
 
 const Reciever = styled(MessageElement)`
-background-color:whitesmoke;
+background-color:white;
 text-align:left;
 `;
 

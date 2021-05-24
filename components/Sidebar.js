@@ -39,6 +39,7 @@ const Sidebar = () => {
   
     return (
         <Container>
+
           <Header>
             <UserAvatar src={user.photoURL} onClick={() => auth.signOut()}/>
             <IconsContainer>
@@ -50,10 +51,13 @@ const Sidebar = () => {
             </IconButton>
             </IconsContainer>
           </Header>
+         
           <Search>
             <SearchIcon />
             <SearchInput placeholder='Search in chats'/>
           </Search>
+
+
           <SidebarButton onClick={createChat} >Start a new chat</SidebarButton>
           {/* list of chats */}
           {
@@ -71,8 +75,8 @@ const Container = styled.div`
   flex:0.45;
   border-right:1px solid whitesmoke;
   height:100vh;
-  min-width:300px;
-  max-width:350px;
+  min-width:350px;
+  max-width:400px;
   overflow-y:scroll;
   ::-webkit-scrollbar {
     display:none;
@@ -85,7 +89,7 @@ const Container = styled.div`
 const Search = styled.div`
 display:flex;
 align-items:center;
-padding:5px;
+padding:15px;
 border-radius:2px;
 `;
 
@@ -101,7 +105,8 @@ const SearchInput = styled.input`
 outline-width:0;
 border:none;
 flex:1;
-
+margin-left: 10px;
+font-size: 1em;
 `;
 
 
@@ -109,7 +114,7 @@ const Header = styled.div`
 display:flex;
 position:sticky;
 top:0;
-background-color:white;
+background-color:#EDEDED;
 z-index:1;
 justify-content:space-between;
 align-items:center;
