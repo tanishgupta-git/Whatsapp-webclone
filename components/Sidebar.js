@@ -7,12 +7,15 @@ import * as EmailValidator from 'email-validator';
 import { auth,db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
+import { useState } from 'react';
 import Chat from "./Chat";
+import getRecipientEmail from "../utils/getRecipientemail";
 
-const Sidebar = () => {
+const Sidebar = ({minDisplay,width}) => {
   const [user] = useAuthState(auth);
   const userChatRef = db.collection('chats').where('users','array-contains',user.email);
   const [chatsSnapshot] = useCollection(userChatRef);
+  const [search,Setsearch] = useState(); 
 
   const createChat = () => {
     const input = prompt(
@@ -38,7 +41,7 @@ const Sidebar = () => {
      );  
   
     return (
-        <Container>
+        <Container minDisplay={minDisplay} width={width}>
 
           <Header>
             <UserAvatar src={user.photoURL} onClick={() => auth.signOut()}/>
@@ -54,16 +57,27 @@ const Sidebar = () => {
          
           <Search>
             <SearchIcon />
-            <SearchInput placeholder='Search in chats'/>
+            <SearchInput placeholder='Search in chats' onChange={ (e) => Setsearch(e.target.value)}/>
           </Search>
 
 
           <SidebarButton onClick={createChat} >Start a new chat</SidebarButton>
           {/* list of chats */}
-          {
-            chatsSnapshot?.docs.map( chat => (
-              <Chat key={chat.id} id={chat.id} users={chat.data().users}/>
-            ))
+          { 
+              search ? 
+              ( chatsSnapshot?.docs.filter(chat => ( getRecipientEmail(chat.data().users,user).indexOf(search) !== -1 ))
+              .map( chat => (
+                <Chat key={chat.id} id={chat.id} users={chat.data().users}/>
+              ))
+
+              )
+               : 
+              ( 
+              chatsSnapshot?.docs.map( chat => (
+                <Chat key={chat.id} id={chat.id} users={chat.data().users}/>
+              ))
+      
+              ) 
           }
         </Container>
       );
@@ -72,17 +86,23 @@ const Sidebar = () => {
 export default Sidebar;
 
 const Container = styled.div`
-  flex:0.45;
+  flex: 0.45;
   border-right:1px solid whitesmoke;
   height:100vh;
   min-width:350px;
-  max-width:400px;
+  max-width: 400px;
   overflow-y:scroll;
   ::-webkit-scrollbar {
     display:none;
   }
   -ms-overflow-style:none;
   scrollbar-width:none;
+  @media  (max-width:600px) {
+  max-width: 600px;
+  width:${props => props.width};
+  flex:1;
+  display: ${props => props.minDisplay};
+}
 `;
 
 

@@ -12,7 +12,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-    <Sidebar />
+    <Sidebar minDisplay="block" width="100%"/>
     <StartChat />
     </div>
   )

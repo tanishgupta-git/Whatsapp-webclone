@@ -16,6 +16,10 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 width: 100%;
+
+@media  (max-width:600px) {
+  display: none;
+}
 `;
 const Image = styled.img`
 width: 250px;
