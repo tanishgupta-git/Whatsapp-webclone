@@ -13,12 +13,23 @@ import { useRef, useState } from 'react';
 import firebase from "firebase";
 import getRecipientEmail from "../utils/getRecipientemail";
 import TimeAgo from 'timeago-react';
-
+import dynamic from "next/dynamic";
+const Picker = dynamic(() => import('emoji-picker-react') ,{
+   ssr: false,
+ });
 const ChatScreen = ({chat,messages}) => {
    const [user] = useAuthState(auth);
    const router = useRouter();
    const [input,Setinput] = useState("");
    const endOfMessagesRef = useRef(null);
+   const [selectEmoji,SetselectEmoji] = useState(false);
+   const onEmojiClick = (event, emojiObject) => {
+      let sym = emojiObject.unified.split('-')
+      let codesArray = []
+      sym.forEach(el => codesArray.push('0x' + el))
+      let emoji = String.fromCodePoint(...codesArray)
+     Setinput(prev => prev + emoji)
+   };
    const [messagesSnapshot] = useCollection(
    db.collection('chats')
    .doc(router.query.id)
@@ -110,7 +121,10 @@ const ChatScreen = ({chat,messages}) => {
               <EndOfMessage ref={endOfMessagesRef}/>
            </MessageContainer>
            <InputContainer>
-             <InsertEmoticonIcon />
+            <PickerContainer>
+             <InsertEmoticonIcon onClick={() => SetselectEmoji(prev => !prev)}/>
+            {  selectEmoji && <Picker onEmojiClick={onEmojiClick} pickerStyle={{position:'absolute',top:"-310px",left:"100%",zIndex:"1000"}} /> }
+             </PickerContainer> 
              <Input value={input} onChange={(e) => Setinput(e.target.value)} placeholder="Enter Message"/>
              <button hidden disabled={!input} type="submit" onClick={sendMessage}>Send Message</button>
            </InputContainer>
@@ -179,4 +193,7 @@ const MessageContainer = styled.div`
 padding:30px;
 background-color:#e5ded8;
 min-height:90vh;
+`;
+const PickerContainer = styled.div`
+position:relative;
 `;
