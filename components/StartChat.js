@@ -16,7 +16,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 width: 100%;
-
+z-index: 1;
 @media  (max-width:600px) {
   display: none;
 }

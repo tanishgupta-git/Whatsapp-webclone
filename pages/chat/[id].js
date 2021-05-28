@@ -9,16 +9,19 @@ import getRecipientEmail from "../../utils/getRecipientemail";
 const Chat = ({chat,messages}) => {
     const [user] = useAuthState(auth);
 
-    return (  
-        <Container>
-            <Head>
-                <title>Chat with {getRecipientEmail(chat.users,user)}</title>
-            </Head>
-            <Sidebar minDisplay="none" width="0" />
-            <ChatContainer>
-               <ChatScreen chat={chat} messages={messages} />
-            </ChatContainer>
-        </Container>
+    return (
+     <BackGroundContaniner>
+           <GreenBackContainer></GreenBackContainer>
+            <Container>
+                <Head>
+                    <title>Chat with {getRecipientEmail(chat.users,user)}</title>
+                </Head>
+                <Sidebar minDisplay="none" width="0" />
+                <ChatContainer>
+                <ChatScreen chat={chat} messages={messages} />
+                </ChatContainer>
+            </Container>
+        </BackGroundContaniner>  
     );
 }
  
@@ -54,16 +57,41 @@ export async function getServerSideProps(context) {
 
 
 const Container = styled.div`
-display:flex;`;
+display:flex;
+width:90%;
+margin:auto;
+height: 90vh;
+@media (max-width:900px){
+    width:100%;
+    height: 100vh;
+}
+`;
 
 const ChatContainer = styled.div`
 flex:1;
 overflow:scroll;
-height:100vh;
-
+height:100%;
+z-index: 1000;
 ::-webkit-scrollbar {
     display:none;
 }
 -ms-overflow-style:none;
 scrollbar-width:none;
+`;
+
+const BackGroundContaniner = styled.div`
+display: flex;
+align-items: center;
+height: 100vh;
+background-color: #dbdbdb;
+position: relative;
+`;
+const GreenBackContainer = styled.div`
+position: absolute;
+top:0;
+left:0;
+width:100%;
+height: 30%;
+background-color: #009788;
+z-index: 0;
 `;

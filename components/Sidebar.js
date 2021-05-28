@@ -88,10 +88,12 @@ export default Sidebar;
 const Container = styled.div`
   flex: 0.45;
   border-right:1px solid whitesmoke;
-  height:100vh;
+  height:100%;
   min-width:350px;
   max-width: 400px;
   overflow-y:scroll;
+  background-color: #ffffff;
+  z-index: 1;
   ::-webkit-scrollbar {
     display:none;
   }
@@ -125,6 +127,7 @@ const SearchInput = styled.input`
 outline-width:0;
 border:none;
 flex:1;
+z-index: 1;
 margin-left: 10px;
 font-size: 1em;
 `;
