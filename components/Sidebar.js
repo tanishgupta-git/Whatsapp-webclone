@@ -10,12 +10,14 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import { useState } from 'react';
 import Chat from "./Chat";
 import getRecipientEmail from "../utils/getRecipientemail";
+import Link from 'next/link'
 
 const Sidebar = ({minDisplay,width}) => {
   const [user] = useAuthState(auth);
   const userChatRef = db.collection('chats').where('users','array-contains',user.email);
   const [chatsSnapshot] = useCollection(userChatRef);
   const [search,Setsearch] = useState(); 
+  const [popUpHeader,SetpopUpHeader] = useState(false); 
 
   const createChat = () => {
     const input = prompt(
@@ -44,14 +46,33 @@ const Sidebar = ({minDisplay,width}) => {
         <Container minDisplay={minDisplay} width={width}>
 
           <Header>
-            <UserAvatar src={user.photoURL} onClick={() => auth.signOut()}/>
+            <UserAvatar src={user.photoURL}/>
             <IconsContainer>
-             <IconButton>
-               <ChatIcon />
-            </IconButton>
-            <IconButton>
-               <MoreVertIcon />
-            </IconButton>
+            <Link href="/">
+            <a>
+              <IconButton>
+                <ChatIcon />
+              </IconButton>
+            </a>
+            </Link>
+              <IconButton onClick={ () => SetpopUpHeader(prev => !prev)}>
+                <MoreVertIcon />
+              </IconButton>
+             { 
+               popUpHeader && 
+               <HeaderPopUp>
+               <Link href='/profile'>
+               <a>
+                <HeaderItem>
+                        My Profile
+                  </HeaderItem>
+                </a>
+                </Link>
+                <HeaderItem onClick={() => auth.signOut()}>
+                      Logout
+                </HeaderItem>
+                </HeaderPopUp>
+             }
             </IconsContainer>
           </Header>
          
@@ -138,18 +159,37 @@ display:flex;
 position:sticky;
 top:0;
 background-color:#EDEDED;
-z-index:1;
+z-index:2;
 justify-content:space-between;
 align-items:center;
 padding:15px;
 height:80px;
 border-bottom:1px solid whitesmoke;
 `;
-
+const HeaderPopUp = styled.ul`
+margin:0;
+padding:0;
+list-style: none;
+position: absolute;
+top:35px;
+right:30px;
+background-color:whitesmoke;
+width:220px;
+`;
+const HeaderItem = styled.li`
+padding:20px;
+text-align: center;
+width:100%;
+cursor: pointer;
+:hover {
+ background-color : #dbdbdb;
+}
+`;
 const UserAvatar = styled(Avatar)`
 cursor: pointer;
  :hover{
   opacity:0.8;
 } `;
 
-const IconsContainer = styled.div``;
+const IconsContainer = styled.div`
+position:relative`;

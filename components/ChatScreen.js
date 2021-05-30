@@ -12,6 +12,9 @@ import firebase from "firebase";
 import getRecipientEmail from "../utils/getRecipientemail";
 import TimeAgo from 'timeago-react';
 import dynamic from "next/dynamic";
+import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
+import Link from 'next/link'
+
 const Picker = dynamic(() => import('emoji-picker-react') ,{
    ssr: false,
  });
@@ -85,6 +88,13 @@ const ChatScreen = ({chat,messages}) => {
     return ( 
         <Container>
            <Header>
+           <Link href='/'>
+           <a>
+            <HeaderArrow>
+               <KeyboardArrowLeftIcon />
+            </HeaderArrow>
+            </a>
+            </Link>
            {
             recipient ? (
              <Avatar src={recipient.photoURL}/> )
@@ -132,6 +142,13 @@ export default ChatScreen;
 const Container = styled.div`
 
 `;
+const HeaderArrow = styled.div`
+display: none;
+margin: 0 5px 0 0;
+@media (max-width:600px) {
+display: block;
+}
+`; 
 const Input = styled.input`
 flex:1;
 padding:20px;
@@ -191,4 +208,5 @@ min-height:90vh;
 `;
 const PickerContainer = styled.div`
 position:relative;
+cursor: pointer;
 `;
