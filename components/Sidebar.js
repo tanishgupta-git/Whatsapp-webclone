@@ -36,6 +36,8 @@ const Sidebar = ({minDisplay,width}) => {
       db.collection('chats').add({
         users:[user.email,input]
       })
+    }else{
+      alert("Enter a valid email");
     }
   }
   const chatAlreadyExists = (recipientEmail) => 
@@ -46,7 +48,11 @@ const Sidebar = ({minDisplay,width}) => {
         <Container minDisplay={minDisplay} width={width}>
 
           <Header>
-            <UserAvatar src={user.photoURL}/>
+           <Link href='/profile'>
+              <a>
+               <UserAvatar src={user.photoURL}/>
+              </a>
+            </Link>
             <IconsContainer>
             <Link href="/">
             <a>
@@ -173,7 +179,9 @@ list-style: none;
 position: absolute;
 top:35px;
 right:30px;
-background-color:whitesmoke;
+background-color:#ffffff;
+box-shadow: -2px -2px 2px rgba(0,0,0,0.09),2px 2px rgba(0,0,0,0.09);
+border-radius: 2px;
 width:220px;
 `;
 const HeaderItem = styled.li`

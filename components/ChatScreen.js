@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styled from "styled-components";
 import { auth, db } from "../firebase";
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { useCollection } from "react-firebase-hooks/firestore";
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import Message from "./Message";
@@ -91,7 +90,9 @@ const ChatScreen = ({chat,messages}) => {
            <Link href='/'>
            <a>
             <HeaderArrow>
+            <IconButton>
                <KeyboardArrowLeftIcon />
+            </IconButton>
             </HeaderArrow>
             </a>
             </Link>
@@ -114,11 +115,7 @@ const ChatScreen = ({chat,messages}) => {
                )}
                
              </HeaderInformation>
-             <HeaderIcons>
-                <IconButton>
-                   <MoreVertIcon />
-                </IconButton>
-             </HeaderIcons>
+      
            </Header>
 
            <MessageContainer>
@@ -130,7 +127,7 @@ const ChatScreen = ({chat,messages}) => {
              <InsertEmoticonIcon onClick={() => SetselectEmoji(prev => !prev)}/>
             {  selectEmoji && <Picker onEmojiClick={onEmojiClick} pickerStyle={{position:'absolute',top:"-310px",left:"100%",zIndex:"1000"}} /> }
              </PickerContainer> 
-             <Input value={input} onChange={(e) => Setinput(e.target.value)} placeholder="Enter Message"/>
+             <Input value={input} onChange={(e) => Setinput(e.target.value)} placeholder="Enter Message" />
              <button hidden disabled={!input} type="submit" onClick={sendMessage}>Send Message</button>
            </InputContainer>
         </Container>
@@ -199,7 +196,6 @@ const EndOfMessage = styled.div`
 margin-bottom:50px;
 `;
 
-const HeaderIcons = styled.div``;
 
 const MessageContainer = styled.div`
 padding:30px;
