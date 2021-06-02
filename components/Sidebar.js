@@ -48,7 +48,7 @@ const Sidebar = ({minDisplay,width}) => {
         <Container minDisplay={minDisplay} width={width}>
 
           <Header>
-           <Link href='/profile'>
+           <Link href={`/profile/${user.uid}`}>
               <a>
                <UserAvatar src={user.photoURL}/>
               </a>
@@ -67,7 +67,7 @@ const Sidebar = ({minDisplay,width}) => {
              { 
                popUpHeader && 
                <HeaderPopUp>
-               <Link href='/profile'>
+               <Link href={`/profile/${user.uid}`}>
                <a>
                 <HeaderItem>
                         My Profile
