@@ -126,8 +126,8 @@ const Container = styled.div`
   }
   -ms-overflow-style:none;
   scrollbar-width:none;
-  @media  (max-width:600px) {
-  max-width: 600px;
+  @media  (max-width:720px) {
+  max-width: 720px;
   width:${props => props.width};
   flex:1;
   display: ${props => props.minDisplay};
@@ -171,6 +171,9 @@ align-items:center;
 padding:15px;
 height:80px;
 border-bottom:1px solid whitesmoke;
+@media (max-width:720px) {
+      background-color: #075e55;
+   }
 `;
 const HeaderPopUp = styled.ul`
 margin:0;
@@ -200,4 +203,12 @@ cursor: pointer;
 } `;
 
 const IconsContainer = styled.div`
-position:relative`;
+position:relative;
+
+@media (max-width:720px) {
+ svg {
+   color:#ffffff;
+ }
+ 
+}`
+ ;

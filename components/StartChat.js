@@ -17,7 +17,7 @@ justify-content: center;
 align-items: center;
 width: 100%;
 z-index: 1;
-@media  (max-width:600px) {
+@media  (max-width:720px) {
   display: none;
 }
 `;

@@ -142,8 +142,11 @@ const Container = styled.div`
 const HeaderArrow = styled.div`
 display: none;
 margin: 0 5px 0 0;
-@media (max-width:600px) {
-display: block;
+@media (max-width:720px) {
+   display: block;
+   svg {
+      color:#ffffff;
+   }
 }
 `; 
 const Input = styled.input`
@@ -177,6 +180,9 @@ const Header = styled.div`
    height:80px;
    align-items:center;
    border-bottom:1px solid whitesmoke;
+   @media (max-width:720px) {
+      background-color: #075e55;
+   }
 `;
 
 const HeaderInformation = styled.div`
@@ -184,11 +190,17 @@ const HeaderInformation = styled.div`
    flex:1;
 
    >h3 {
-      margin-bottom:3px
+      margin-bottom:3px;
+   @media (max-width:720px) {
+      color: #ffffff;
+   }
    }
    >p {
       font-size:14px;
       color:gray;
+    @media (max-width:720px) {
+      color: #ffffff;
+   }
    }
 `;
 
